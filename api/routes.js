@@ -85,6 +85,16 @@ router.delete('/questions/:questionID', function(req, res, next){
 });
 
 
+// TODO - Temporary
+router.get("/users/", function(req, res, next){
+	User.find({})
+				.sort({text: -1})
+				.exec(function(err, user){
+					if(err) return next(err);
+					res.json(user);
+				});
+});
+
 // Get User
 router.get("/users/:userID", function(req, res, next){
 	res.json(req.user);

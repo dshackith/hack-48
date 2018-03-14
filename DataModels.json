@@ -27,13 +27,14 @@
             "status": "done",
             "questions": [
                 {
-                    "question_index": 0,
+                    //"question_index": 0,
                     "answer_order": [2,3,0,1], // For multiple choice only
                     "question_id": "1234567890",
                     "status": "answered",
                     "time_asked": "",
                     "time_answered": "",
                     "answer_given": 2,
+                    "correct_answer": 3,
                     "correct": false
                 },
                 {
@@ -50,8 +51,8 @@
         }
     ]
     "stats": {
-        "total_questions_attempted": 123,
-        "total_questions_correct": 183
+        "total_questions_attempted": 183,
+        "total_questions_correct": 123
     }
 
 }

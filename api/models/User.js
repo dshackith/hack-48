@@ -9,7 +9,19 @@ var UserSchema = new Schema({
         total_attempts: Number,
         total_correct: Number,
         total_added: Number,
-    }
+    },
+    questions: [
+                {
+                    answer_order: [Number], // For multiple choice only
+                    question_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Question'},
+                    status: String,
+                    time_asked: {type: Date, default: Date.now},
+                    time_answered: Date,
+                    answer_given: Number,
+                    correct_answer: Number,
+                    correct: Boolean
+                }
+            ]
 });
 
 var User = mongoose.model('User', UserSchema);
