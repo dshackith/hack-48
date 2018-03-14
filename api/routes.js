@@ -168,7 +168,7 @@ router.post("/answer/:questionID/:userID", function(req, res, next){
 		    status: 'answered',
 		    time_answered: Date.now(),
 		    answer_given: answerGiven,
-		    correct_answer: correctAnswer
+		    correct_answer: correctAnswer,
 		    correct: correct
 		};
 
