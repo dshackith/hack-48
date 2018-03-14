@@ -1,6 +1,7 @@
 'use strict';
 
 var express = require('express');
+var _ = require('underscore');
 var router = express.Router();
 var Question = require('./models/Question').Question;
 var User = require('./models/User').User;
@@ -59,6 +60,8 @@ router.get("/questions/:questionID", function(req, res, next){
 
 // View random Question
 router.get("/questions/random/", function(req, res, next){
+	
+	// Paramesh: We might also want the User ID passed in - because we may have to add this question to the "attempted" list.
 	
 	// From https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
 	Question.count().exec(function (err, count) {
@@ -146,34 +149,43 @@ router.post("/answer/:questionID/:userID", function(req, res, next){
 	var user = req.user;
 
 	// TODO - find if there's an existing answer
-	// Generate answer structure
-	
-	var correctAnswer = _.filter(req.question.answers, );
-	var answer = 
-	{
-                    answer_order: , // For multiple choice only
-                    question_id: req.question,
-                    status: 'answered',
-                    time_answered: Date.now(),
-                    answer_given: answerGiven,
-                    correct: Boolean
-                };
-                user.questions.push(answer);
 
-		user.save(function(err, user){
-			if(err) return next(err);
-			res.status(200);
-			res.json(user);
-		});
+	var correctAnswer = 0;
+	var correct = false;
+
+	_.each(req.question.answers, function(answer, index) {
+		if(answer.correct) {
+			correctAnswer = index;
+		}
+	});
+
+	if(answerGiven == correctAnswer) {
+		correct = true;
+	}
+
+	var answer = {
+		    question_id: req.question,
+		    status: 'answered',
+		    time_answered: Date.now(),
+		    answer_given: answerGiven,
+		    correct_answer: correctAnswer
+		    correct: correct
+		};
+
+	user.questions.push(answer);
+
+	// Update stats
+	if(correct) {
+		user.stats.total_correct++;
+		user.stats.total_attempts++; // TODO - this logic will move if the answer is already generated on Viewing the question
+	}
+
+	user.save(function(err, user){
+		if(err) return next(err);
+		res.status(200);
+		res.json(answer);
+	});
 });
-
-// Possible APIs required:
-/**
- * Get Next question for a User
- * Update User's Response to a question
- * 
- */
-
 
 
 // This line is required for use in other files
