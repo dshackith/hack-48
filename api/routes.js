@@ -57,6 +57,25 @@ router.get("/questions/:questionID", function(req, res, next){
 	res.json(req.question);
 });
 
+// View random Question
+router.get("/questions/random/", function(req, res, next){
+	
+	// From https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
+	Question.count().exec(function (err, count) {
+	
+		// Random offset
+		let random = Math.floor(Math.random() * count)
+		
+		Question.findOne()
+			.skip(random)
+			.sort({text: -1})
+			.exec(function(err, question){
+				if(err) return next(err);
+				res.json(question);
+			});
+	})
+});
+
 // Create new Question
 router.post("/questions/", function(req, res, next){
 		var question = new Question(req.body);
@@ -100,6 +119,53 @@ router.get("/users/:userID", function(req, res, next){
 	res.json(req.user);
 });
 
+// Create new User
+router.post("/users/", function(req, res, next){
+		var user = new User(req.body);
+		user.save(function(err, user){
+			if(err) return next(err);
+			res.status(200);
+			res.json(user);
+		});
+});
+
+// Update User
+router.put("/users/:userID", function(req, res, next){
+	req.user.update(req.body, function(err, user){
+		if(err) return next(err);
+		res.status(200);
+		res.json(user);
+	});
+});
+
+// Answer a question
+router.post("/answer/:questionID/:userID", function(req, res, next){
+	console.log(req.body);
+	var answerGiven = req.body.answer_given;
+	
+	var user = req.user;
+
+	// TODO - find if there's an existing answer
+	// Generate answer structure
+	
+	var correctAnswer = _.filter(req.question.answers, );
+	var answer = 
+	{
+                    answer_order: , // For multiple choice only
+                    question_id: req.question,
+                    status: 'answered',
+                    time_answered: Date.now(),
+                    answer_given: answerGiven,
+                    correct: Boolean
+                };
+                user.questions.push(answer);
+
+		user.save(function(err, user){
+			if(err) return next(err);
+			res.status(200);
+			res.json(user);
+		});
+});
 
 // Possible APIs required:
 /**
