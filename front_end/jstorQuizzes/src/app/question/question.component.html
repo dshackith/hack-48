@@ -1,3 +1,11 @@
-<p>
-  question works!
-</p>
+<h2>Submit a question</h2>
+
+  <p><label>Question:</label> <input type="text" [(ngModel)]="question.text"></p>
+  <p>Answers:</p>
+  <p *ngFor="let a of question.answers; let i = index"><input type="text" [(ngModel)]="question.answers[i].text" />
+    <input type="radio" name="correct" [(ngModel)]="question.answers[i].correct" />
+    <button *ngIf="(question.answers.length - 1) == i" (click)="addAnswer()">+</button>
+    <button *ngIf="(question.answers.length - 1) != i" (click)="removeAnswer(i)">-</button>
+  </p>
+  <p><label>Source:</label> <input type="text" [(ngModel)]="question.sources[0].url"></p>
+  <button (click)="submitQuestion()">Submit</button>
