@@ -1,0 +1,27 @@
+{
+  "name": "jstor-quiz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "paramesh.muthuramalingam@ithaka.org, daniel.shackelford@ithaka.org, jason.thiede@ithaka.org",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-cluster": "0.0.5",
+    "file-system": "^2.2.2",
+    "gm": "^1.23.0",
+    "mongoose": "^4.13.7",
+    "morgan": "^1.9.0",
+    "pdf2img": "^0.5.0",
+    "querystring": "^0.2.0",
+    "request": "^2.83.0",
+    "url": "^0.11.0",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {},
+  "description": ""
+}
