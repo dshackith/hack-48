@@ -59,24 +59,32 @@ router.get("/questions/:questionID", function(req, res, next){
 });
 
 // View random Question
-router.get("/questions/random/", function(req, res, next){
+router.get("/randomQuestion/", function(req, res, next){
 	
 	// Paramesh: We might also want the User ID passed in - because we may have to add this question to the "attempted" list.
 	
-	// From https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
+	Question.aggregate(
+		{ $sample: { size: 1 } }
+		)
+		.exec(function(err, question){
+			if(err) return next(err);
+			res.json(question);
+		});
+
+	/*// From https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
 	Question.count().exec(function (err, count) {
+		console.log(count);
 	
 		// Random offset
 		let random = Math.floor(Math.random() * count)
 		
 		Question.findOne()
 			.skip(random)
-			.sort({text: -1})
 			.exec(function(err, question){
 				if(err) return next(err);
 				res.json(question);
 			});
-	})
+	})*/
 });
 
 // Create new Question
