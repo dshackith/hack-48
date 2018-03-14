@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { QuestionComponent } from './question/question.component';
+import { SubmitQuestionComponent } from './question/submit-question/submit-question.component';
 import { QuestionApiService } from './question-api.service'
 
 import { HttpClientModule, HttpClient, HttpResponse} from '@angular/common/http';
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionComponent
+    SubmitQuestionComponent
   ],
   imports: [
     BrowserModule,

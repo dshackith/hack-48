@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionApiService } from '../question-api.service';
+import { QuestionApiService } from '../../question-api.service';
 import { FormsModule } from '@angular/forms';
 import { NgModel } from '@angular/forms';
 
 @Component({
-  selector: 'app-question',
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css']
+  selector: 'app-submit-question',
+  templateUrl: './submit-question.component.html',
+  styleUrls: ['./submit-question.component.css']
 })
-export class QuestionComponent implements OnInit {
+export class SubmitQuestionComponent implements OnInit {
 
   constructor(
     private questionApiService: QuestionApiService
