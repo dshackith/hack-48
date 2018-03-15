@@ -27,7 +27,11 @@ export class SubmitQuestionComponent implements OnInit {
   public newQuestion = function() {
     this.question = {
       text: "",
-      answers: [],
+      answers: [
+        {text: "", correct: false},
+        {text: "", correct: false},
+        {text: "", correct: false},
+      ],
       sources: [
         {url: "", citation: ""}
       ],

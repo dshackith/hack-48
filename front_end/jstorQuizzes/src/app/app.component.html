@@ -8,7 +8,7 @@
             <div class=support-copy>Support</div>
             <a class=trivia-copy routerLink="/">Trivia</a>
             <div *ngIf="currentUser">
-                <div class="group10-copy4 login-to-my-account">
+                <div class="hello-user">
                     <span style="font-size: medium"> Hello <b>{{currentUser.name}}</b>!</span>
                 </div>
                 <a class=register-copy (click)="logout()">Logout</a>

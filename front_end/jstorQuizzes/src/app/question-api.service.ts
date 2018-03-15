@@ -16,8 +16,11 @@ export class QuestionApiService {
     .map((res:HttpResponse <any>) => res);
   }
 
-  public getRandomQuestion = function (question) {
-    return this.http.get(`${environment.apiAddress}/randomQuestion/`)
+  public getRandomQuestion = function (previousQuestions) {
+    if(!previousQuestions) {
+      previousQuestions = [];
+    }
+    return this.http.post(`${environment.apiAddress}/randomQuestion/`, previousQuestions)
     .map((res:HttpResponse <any>) => res);
   }
 

@@ -12,8 +12,9 @@ function formQuestionObject(q) {
   let result = {
     _id: q._id,
     text: q.text,
+    contributor: q.contributor ? q.contributor.name : '',
     answers: q.answers ? q.answers.map(a => a.text) : null // There _should_ always be answers, but this plays it safe
-  }
+  };
 
   return result;
 }
@@ -53,38 +54,67 @@ router.get("/questions/:questionID", function(req, res, next) {
 });
 
 // View random Question
-router.get("/randomQuestion/", function(req, res, next) {
+router.post("/randomQuestion/", function(req, res, next) {
+  let previousQuestions = req.body;
+  if(!previousQuestions) {
+    previousQuestions = [];
+  }
 
-  Question.aggregate(
-    {$sample: {size: 1}}
-  )
+  Question
+    .find({
+      _id: {$nin: previousQuestions}
+    })
+    .limit(1)
     .exec(function(err, question) {
       if(err) return next(err);
 
-      if(req.user) {
-        req.user.questions.push(
-          {
-            question: question[0],
-            status: "asked"
-          }
-        );
-
-        req.user.update(req.user, function(err, user) {
+      if(!question || !question.length) {
+        // Pick some random question
+        return Question.findOne().populate('contributor').exec(function(err, question) {
           if(err) return next(err);
           res.status(200);
-          res.json(formQuestionObject(question[0]));
+          let retQuestion = formQuestionObject(question);
+          retQuestion.clearPrevious = true;
+          return res.json(retQuestion);
         });
-      } else {
-        res.json(formQuestionObject(question[0]))
       }
 
+      Question.populate(question[0], 'contributor', function() {
+        if(req.user) {
+          req.user.questions.push(
+            {
+              question: question[0],
+              status: "asked"
+            }
+          );
+
+          req.user.update(req.user, function(err, user) {
+            if(err) return next(err);
+            res.status(200);
+            res.json(formQuestionObject(question[0]));
+          });
+        } else {
+          res.json(formQuestionObject(question[0]))
+        }
+      });
     });
 
 });
 
 // Create new Question
 router.post("/questions/", function(req, res, next) {
-  var question = new Question(req.body);
+  // Strip out empty answers
+  var json = req.body;
+  if(json && json.answers) {
+    var answers = [];
+    _.each(json.answers, function(answer) {
+      if(answer && answer.text) {
+        answers.push(answer);
+      }
+    });
+    json.answers = answers;
+  }
+  var question = new Question(json);
   if(req.user) {
     question.contributor = user;
   }
@@ -182,11 +212,11 @@ router.post("/answer/:questionID", function(req, res, next) {
 
   if(!answer) {
     answer = {
-      question: req.question,
       status: 'answered'
     }
   }
 
+  answer.question = req.question;
   answer.status = 'answered';
   answer.time_answered = Date.now();
   answer.correct_answer= correctAnswer;
@@ -259,19 +289,32 @@ router.post("/authenticate", function(req, res, next) {
 
         let profile = body.results[0];
 
-        // Woohoo - Now create this user inside our app
-        let user = new User({
-          jstor_username: profile.credentials,
-          jstor_id: profile.internalId,
-          name: profile.contactName,
-          email: profile.contact
-        });
+        // Check if there is an existing user
+        User.findOne({'jstor_id': profile.internalId})
+          .exec(function(err, user) {
+            if(err) return next(err);
 
-        user.save(function(err, user) {
-          if(err) return next(err);
-          res.status(200);
-          res.json(user);
-        });
+            if(user && user._id) {
+              // Exists
+              res.status(200);
+              return res.json(user);
+            } else {
+              // Create one
+              let user = new User({
+                jstor_username: profile.credentials,
+                jstor_id: profile.internalId,
+                name: profile.contactName,
+                email: profile.contact
+              });
+
+              user.save(function(err, user) {
+                if(err) return next(err);
+                res.status(200);
+                res.json(user);
+              });
+            }
+          });
+
       });
     }
   );

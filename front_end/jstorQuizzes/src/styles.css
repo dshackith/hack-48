@@ -317,6 +317,23 @@ h3.question-header {
     line-height: 18.0px
 }
 
+.hello-user {
+    top: 26px;
+    position: absolute;
+    margin: 0;
+    left: 600px;
+    background: rgba(255, 255, 255, 0.0);
+    height: auto;
+    width: auto;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(0, 126, 157, 1.0);
+    text-align: center;
+    line-height: 18.0px
+}
+
 .register-copy {
     background: rgba(255, 255, 255, 0.0);
     top: 27px;

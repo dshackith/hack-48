@@ -43,12 +43,13 @@
             <div *ngIf="updateSuccess.correct" class="alert alert-success">
                 <i class="fa fa-check"></i> <strong>Well done!</strong> You got it right!
             </div>
+
             <div *ngIf="!updateSuccess.correct" class="alert alert-danger">
                 <i class="fa fa-times"></i> <strong>Oh snap!</strong> You got it wrong!
             </div>
 
-            <div *ngIf="updateSuccess.sources && updateSuccess.sources.url">
-                <a href="{{updateSuccess.sources.url}}" target="_blank">Go to JSTOR Source</a>
+            <div *ngIf="updateSuccess.question.sources && updateSuccess.question.sources[0] && updateSuccess.question.sources[0].url">
+                <a class="btn btn-success btn-lg" href="{{updateSuccess.question.sources[0].url}}" target="_blank" style="width: 100%">Go to JSTOR Source</a>
             </div>
         </div>
     </div>

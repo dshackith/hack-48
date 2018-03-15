@@ -33,9 +33,17 @@ export class AnswerQuestionComponent implements OnInit {
 
   currentUser = null;
 
+  previousQuestions = [];
+
   private getQuestion = function() {
-    this.questionApiService.getRandomQuestion()
-    .subscribe(data => this.question = data);
+    this.questionApiService.getRandomQuestion(this.previousQuestions)
+    .subscribe(data => {
+      this.question = data;
+      if(data.clearPrevious) {
+        this.previousQuestions = [];
+      }
+      this.previousQuestions.push(data._id)
+    });
   }
 
   public logAnswer = function (a) {
@@ -43,9 +51,11 @@ export class AnswerQuestionComponent implements OnInit {
     .subscribe(data => {
       this.updateSuccess = data;
 
-      this.currentUser.stats.total_attempts++;
-      if (this.currentUser && data.correct) {
-        this.currentUser.stats.total_correct++;
+      if(this.currentUser && this.currentUser.stats) {
+        this.currentUser.stats.total_attempts++;
+        if (this.currentUser && data.correct) {
+          this.currentUser.stats.total_correct++;
+        }
       }
 
       this.getQuestion();
