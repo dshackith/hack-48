@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var QuestionSchema = new Schema({
     
     text: String,
-    answers: [ {text: String, correct: Boolean} ],
+    answers: [ {text: String, correct: Boolean, total_attempts: Number, total_correct: Number} ],
     sources: [
         {url: String, citation: String}
     ],

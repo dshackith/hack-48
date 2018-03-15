@@ -11,11 +11,758 @@ body {
     content: url('./app/images/j_logo.png');
 }
 
-heading h1 {
+.heading h1 {
     font-size: 48.0px;
     font-weight: bold;
 }
 
 h3.question-header {
     font-size: 16.0px;
+    font-weight: bold;
+}
+
+.question-text {
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: left;
+    line-height: 39.0px;
+    margin: 10px;
+}
+
+.answer-text {
+    margin: 1em;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+}
+
+.content {
+    width: 1024px;
+    height: 100%;
+    position: relative;
+    margin: auto;
+}
+
+.browse-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 79px;
+    height: auto;
+    width: auto;
+    position: absolute;
+    margin: 0;
+    left: 462px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: left;
+    line-height: 21.0px
+}
+
+.advanced-search-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 79px;
+    height: auto;
+    width: auto;
+    position: absolute;
+    margin: 0;
+    left: 233px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: left;
+    line-height: 21.0px
+}
+
+.about-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 78px;
+    height: auto;
+    width: auto;
+    position: absolute;
+    margin: 0;
+    left: 656px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18.0px;
+    color: rgba(0, 126, 157, 1.0);
+    text-align: left;
+    line-height: 22.0px
+}
+
+.support-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 78px;
+    height: auto;
+    width: auto;
+    position: absolute;
+    margin: 0;
+    left: 762px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18.0px;
+    color: rgba(0, 126, 157, 1.0);
+    text-align: left;
+    line-height: 22.0px
+}
+
+.line-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 88px;
+    height: 9px;
+    width: 14px;
+    position: absolute;
+    margin: 0;
+    left: 411px
+}
+
+.line-copy4 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 88px;
+    height: 9px;
+    width: 14px;
+    position: absolute;
+    margin: 0;
+    left: 544px
+}
+
+.page1-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 1px;
+    height: 133px;
+    width: 98px;
+    position: absolute;
+    margin: 0;
+    left: 63px
+}
+
+.page1-copy .fill1 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 107px;
+    height: 26px;
+    width: 13px;
+    position: absolute;
+    margin: 0;
+    left: 17px
+}
+
+.page1-copy .fill3 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 107px;
+    height: 26px;
+    width: 25px;
+    position: absolute;
+    margin: 0;
+    left: 50px
+}
+
+.page1-copy .group7 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 106px;
+    height: 27px;
+    width: 21px;
+    position: absolute;
+    margin: 0;
+    left: 77px
+}
+
+.page1-copy .fill8 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 107px;
+    height: 26px;
+    width: 20px;
+    position: absolute;
+    margin: 0;
+    left: 31px
+}
+
+.page1-copy .fill10 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 107px;
+    height: 26px;
+    width: 14px;
+    position: absolute;
+    margin: 0;
+    left: 0
+}
+
+.page1-copy .fill12 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 0;
+    height: 94px;
+    width: 94px;
+    position: absolute;
+    margin: 0;
+    left: 3px
+}
+
+.jstor-trivia-break {
+    background: rgba(255, 255, 255, 0.0);
+    top: 184px;
+    height: auto;
+    width: 352px;
+    position: absolute;
+    margin: 0;
+    left: 226px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 48.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: left;
+    letter-spacing: -1.0px;
+    line-height: 55.0px
+}
+
+.you-got-it-right {
+    background: rgba(255, 255, 255, 0.0);
+    top: 210px;
+    height: auto;
+    width: 892px;
+    position: absolute;
+    margin: 0;
+    left: 561px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(107, 171, 53, 1.0);
+    text-align: left;
+    line-height: 39.0px
+}
+
+.a1-show-fear2-comm {
+    background: rgba(255, 255, 255, 0.0);
+    top: 249px;
+    height: auto;
+    width: 572px;
+    position: absolute;
+    margin: 0;
+    left: 562px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 20.0px
+}
+
+.go-to-jstor-source {
+    background: rgba(255, 255, 255, 0.0);
+    top: 333px;
+    height: auto;
+    width: 267px;
+    position: absolute;
+    margin: 0;
+    left: 564px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(0, 126, 157, 1.0);
+    text-align: justify;
+    line-height: 30.0px
+}
+
+.in-addition-to-showi {
+    background: rgba(255, 255, 255, 0.0);
+    top: 184px;
+    height: auto;
+    width: 541px;
+    position: absolute;
+    margin: 0;
+    left: 561px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: left;
+    line-height: 27.0px
+}
+
+.group10-copy4 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 26px;
+    height: 18px;
+    width: 145px;
+    position: absolute;
+    margin: 0;
+    left: 691px
+}
+
+.group10-copy4 .login-to-my-account {
+    background: rgba(255, 255, 255, 0.0);
+    top: 0;
+    height: auto;
+    width: auto;
+    position: absolute;
+    margin: 0;
+    left: -1px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(0, 126, 157, 1.0);
+    text-align: center;
+    line-height: 18.0px
+}
+
+.register-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 27px;
+    height: auto;
+    width: auto;
+    position: absolute;
+    margin: 0;
+    left: 883px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14.0px;
+    color: rgba(0, 126, 157, 1.0);
+    text-align: center;
+    line-height: 16.0px
+}
+
+.rectangle-copy10 {
+    background: rgba(153, 0, 0, 1.0);
+    top: 508px;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    margin: 0;
+    left: 231px
+}
+
+.rectangle-copy19 {
+    background: rgba(153, 0, 0, 1.0);
+    top: 638px;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    margin: 0;
+    left: 231px
+}
+
+.rectangle-copy14 {
+    background: rgba(153, 0, 0, 1.0);
+    top: 573px;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    margin: 0;
+    left: 231px
+}
+
+.rectangle-copy20 {
+    background: rgba(153, 0, 0, 1.0);
+    top: 703px;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    margin: 0;
+    left: 231px
+}
+
+.rectangle-copy9 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 508px;
+    height: 50px;
+    width: 581px;
+    position: absolute;
+    margin: 0;
+    left: 231px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(214, 214, 214, 1.0)
+}
+
+.rectangle-copy21 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 638px;
+    height: 50px;
+    width: 581px;
+    position: absolute;
+    margin: 0;
+    left: 231px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(214, 214, 214, 1.0)
+}
+
+.rectangle-copy18 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 573px;
+    height: 50px;
+    width: 581px;
+    position: absolute;
+    margin: 0;
+    left: 231px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(214, 214, 214, 1.0)
+}
+
+.rectangle-copy22 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 703px;
+    height: 50px;
+    width: 581px;
+    position: absolute;
+    margin: 0;
+    left: 231px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(214, 214, 214, 1.0)
+}
+
+.test-your-knowledge {
+    background: rgba(255, 255, 255, 0.0);
+    top: 290px;
+    height: auto;
+    width: 302px;
+    position: absolute;
+    margin: 0;
+    left: 226px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.genetic-influence-on {
+    background: rgba(255, 255, 255, 0.0);
+    top: 397px;
+    height: auto;
+    width: 892px;
+    position: absolute;
+    margin: 0;
+    left: 231px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: left;
+    line-height: 39.0px
+}
+
+.childhood {
+    background: rgba(255, 255, 255, 0.0);
+    top: 517px;
+    height: auto;
+    width: 572px;
+    position: absolute;
+    margin: 0;
+    left: 330px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.early-adulthood {
+    background: rgba(255, 255, 255, 0.0);
+    top: 644px;
+    height: auto;
+    width: 572px;
+    position: absolute;
+    margin: 0;
+    left: 332px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.teen-years {
+    background: rgba(255, 255, 255, 0.0);
+    top: 580px;
+    height: auto;
+    width: 572px;
+    position: absolute;
+    margin: 0;
+    left: 330px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.older-adulthood {
+    background: rgba(255, 255, 255, 0.0);
+    top: 712px;
+    height: auto;
+    width: 572px;
+    position: absolute;
+    margin: 0;
+    left: 332px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.a1 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 515px;
+    height: auto;
+    width: 38px;
+    position: absolute;
+    margin: 0;
+    left: 249px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(255, 255, 255, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.a1-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 645px;
+    height: auto;
+    width: 38px;
+    position: absolute;
+    margin: 0;
+    left: 249px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(255, 255, 255, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.a2 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 580px;
+    height: auto;
+    width: 38px;
+    position: absolute;
+    margin: 0;
+    left: 249px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(255, 255, 255, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.a2-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 710px;
+    height: auto;
+    width: 38px;
+    position: absolute;
+    margin: 0;
+    left: 249px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 24.0px;
+    color: rgba(255, 255, 255, 1.0);
+    text-align: justify;
+    line-height: 32.0px
+}
+
+.question {
+    background: rgba(255, 255, 255, 0.0);
+    top: 369px;
+    height: auto;
+    width: 267px;
+    position: absolute;
+    margin: 0;
+    left: 231px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 30.0px
+}
+
+.stats {
+    background: rgba(255, 255, 255, 0.0);
+    top: 825px;
+    height: auto;
+    width: 267px;
+    position: absolute;
+    margin: 0;
+    left: 234px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 30.0px
+}
+
+.submit-a-question {
+    background: rgba(255, 255, 255, 0.0);
+    top: 916px;
+    height: auto;
+    width: 236px;
+    position: absolute;
+    margin: 0;
+    left: 611px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(0, 126, 157, 1.0);
+    text-align: justify;
+    line-height: 30.0px
+}
+
+.question-submitted-b {
+    background: rgba(255, 255, 255, 0.0);
+    top: 834px;
+    height: auto;
+    width: 236px;
+    position: absolute;
+    margin: 0;
+    left: 610px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 26.0px
+}
+
+.choose-a-answer {
+    background: rgba(255, 255, 255, 0.0);
+    top: 473px;
+    height: auto;
+    width: 267px;
+    position: absolute;
+    margin: 0;
+    left: 233px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 30.0px
+}
+
+.questions-answer-cor {
+    background: rgba(255, 255, 255, 0.0);
+    top: 873px;
+    height: auto;
+    width: 267px;
+    position: absolute;
+    margin: 0;
+    left: 235px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: left;
+    line-height: 30.0px
+}
+
+.a301885 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 873px;
+    height: auto;
+    width: 168px;
+    position: absolute;
+    margin: 0;
+    left: 423px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16.0px;
+    color: rgba(51, 51, 51, 1.0);
+    text-align: justify;
+    line-height: 30.0px
+}
+
+.line2 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 863px;
+    height: 2px;
+    width: 282px;
+    position: absolute;
+    margin: 0;
+    left: 232px
+}
+
+.line2-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 899px;
+    height: 1px;
+    width: 200px;
+    position: absolute;
+    margin: 0;
+    left: 609px
+}
+
+.trivia-copy {
+    background: rgba(255, 255, 255, 0.0);
+    top: 78px;
+    height: auto;
+    width: auto;
+    position: absolute;
+    margin: 0;
+    left: 887px;
+    font-family: 'Arial', Helvetica, Arial, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18.0px;
+    color: rgba(0, 126, 157, 1.0);
+    text-align: left;
+    line-height: 22.0px;
+    text-decoration: underline;
+}
+
+.rectangle4-copy3 {
+    background: rgba(255, 255, 255, 0.0);
+    top: 102px;
+    height: 3px;
+    width: 49px;
+    position: absolute;
+    margin: 0;
+    left: 888px
+}
+
+.align-right {
+    text-align: right;
 }

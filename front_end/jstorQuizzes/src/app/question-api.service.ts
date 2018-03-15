@@ -22,4 +22,12 @@ export class QuestionApiService {
   }
 
 
+  public answerQuestion = function(questionId, answerGiven: number) {
+    let answer = {
+      answer_given: answerGiven
+    };
+
+    return this.http.post(`${environment.apiAddress}/answer/${questionId}`, answer)
+      .map((res: HttpResponse<any>) => res);
+  }
 }

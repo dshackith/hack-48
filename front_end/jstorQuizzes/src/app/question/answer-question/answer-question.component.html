@@ -1,13 +1,53 @@
-  
-    <div class="col-md-2"></div>
-    <div *ngIf="question" class="col-md-8">
-      <h3 class="question-header">Question</h3>
-      <p>{{question.text}}</p>
-      <h3 class="question-header">Choose an answer</h3>
-      <div *ngFor="let answer of question.answers; let i = index" class="answer-option col-md-12" (click)="logAnswer(answer)">
-        <div class="answer-number">{{ i }}</div>
-        <span>{{ answer }}</span>
-      </div>
+<div class="row">
+    <div class="col-md-8 heading">
+        <h1>JSTOR Trivia Break</h1>
+        <h2>Test your knowledge here</h2>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-4">
+        <app-stats></app-stats>
+    </div>
+    <div class="col-md-12">
+        <hr/>
+    </div>
+    <div class="col-md-8">
+        <div *ngIf="question">
+            <h3 class="question-header">Question</h3>
+            <p class="question-text">{{question.text}}</p>
+            <h3 class="question-header">Choose an answer</h3>
+            <div class="list-group">
+                <button class="list-group-item" *ngFor="let answer of question.answers; let i = index" (click)="logAnswer(i)">
+                    <div class="answer-number">{{ i+1 }}</div>
+                    <span class="answer-text">{{ answer }}</span>
+                </button>
+            </div>
 
+            <div>Question Submitted by: <i>Stephanie G</i>
+                <a class="pull-right" routerLink="/submitQuestion" routerLinkActive="active"><strong>Submit a Question</strong></a></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div *ngIf="updateSuccess" style="border-left: 1px solid #eee; padding-left: 1em;">
+
+            <p>{{updateSuccess.question.text}}</p>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let answer of updateSuccess.question.answers; let i = index">
+                    <span class="{{answer.correct ? 'text-success' : 'text-danger'}}">
+                        {{ answer.text }}
+                        <span class="pull-right" *ngIf="answer.correct"><i class="fa fa-check"></i></span>
+                    </span>
+                </li>
+            </ul>
+
+            <div *ngIf="updateSuccess.correct" class="alert alert-success">
+                <i class="fa fa-check"></i> <strong>Well done!</strong> You got it right!
+            </div>
+            <div *ngIf="!updateSuccess.correct" class="alert alert-danger">
+                <i class="fa fa-times"></i> <strong>Oh snap!</strong> You got it wrong!
+            </div>
+
+            <div *ngIf="updateSuccess.sources && updateSuccess.sources.url">
+                <a href="{{updateSuccess.sources.url}}" target="_blank">Go to JSTOR Source</a>
+            </div>
+        </div>
+    </div>
+</div>

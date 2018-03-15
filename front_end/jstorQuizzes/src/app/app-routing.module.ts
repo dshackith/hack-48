@@ -4,8 +4,9 @@ import { SubmitQuestionComponent } from './question/submit-question/submit-quest
 import { AnswerQuestionComponent } from './question/answer-question/answer-question.component';
 
 const routes: Routes = [
-  { path: 'submitQuestion', component: SubmitQuestionComponent },
-  { path: 'answerQuestion', component: AnswerQuestionComponent }
+    {path: '', redirectTo: '/answerQuestion', pathMatch: 'full'},
+    {path: 'submitQuestion', component: SubmitQuestionComponent},
+    {path: 'answerQuestion', component: AnswerQuestionComponent}
 ];
 
 @NgModule({

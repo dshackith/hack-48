@@ -1,12 +1,23 @@
 <h2>Submit a question</h2>
+
 <form>
-  <p><label>Question:</label> <input type="text" [(ngModel)]="question.text" name="text"></p>
-  <p>Answers:</p>
-  <p *ngFor="let a of question.answers; let i = index"><input type="text" [(ngModel)]="question.answers[i].text" name="answer-{{i}}" />
-    <input type="checkbox" name="correct" (click)="selectCorrect(i)" [checked]="question.answers[i].correct"/>
-    <button *ngIf="(question.answers.length - 1) == i" (click)="addAnswer()">+</button>
-    <button *ngIf="(question.answers.length - 1) != i" (click)="removeAnswer(i)">-</button>
-  </p>
-  <p><label>Source:</label> <input type="text" [(ngModel)]="question.sources[0].url" name="source"></p>
-  <button (click)="submitQuestion()">Submit</button>
+    <div class="form-group">
+        <label>Question</label>
+        <textarea [(ngModel)]="question.text" name="text" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Answers</label>
+        <p *ngFor="let a of question.answers; let i = index">
+            <input type="text" [(ngModel)]="question.answers[i].text" name="answer-{{i}}" class="form-control" style="display: inline-block; width: 75%"/>
+            &nbsp;<input type="checkbox" name="correct" (click)="selectCorrect(i)" [checked]="question.answers[i].correct" id="checkbox{{i}}"/> <label for="checkbox{{i}}">Correct</label>
+            <button *ngIf="(question.answers.length - 1) == i" (click)="addAnswer()" class="btn"><i class="fa fa-plus-circle"></i></button>
+            <button *ngIf="(question.answers.length - 1) != i" (click)="removeAnswer(i)" class="btn"><i class="fa fa-minus-circle"></i></button>
+        </p>
+    </div>
+    <div class="form-group">
+        <label>JSTOR Source</label>
+        <input type="text" [(ngModel)]="question.sources[0].url" name="source" class="form-control"/>
+    </div>
+    <button (click)="submitQuestion()" class="btn btn-primary">Submit</button>
+    <a routerLink="/" class="btn btn-default">Cancel</a>
 </form>

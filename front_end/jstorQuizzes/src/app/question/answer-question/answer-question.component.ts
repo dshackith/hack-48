@@ -23,13 +23,17 @@ export class AnswerQuestionComponent implements OnInit {
   question: any;
 
   private getQuestion = function() {
-    console.log(this.questionApiService);
     this.questionApiService.getRandomQuestion()
     .subscribe(data => this.question = data);
   }
 
   public logAnswer = function (a) {
-    console.log(a);
+    this.questionApiService.answerQuestion(this.question._id, a)
+    .subscribe(data => {
+      this.updateSuccess = data;
+      this.getQuestion();
+    });
+
   }
 
 }
