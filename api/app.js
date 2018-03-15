@@ -80,7 +80,7 @@ app.use(function(err, req, res, next){
 	});
 });
 
-var port = process.env.PORT || 3004;
+var port = process.env.PORT || 3008;
 
 app.listen(port, function(){
 	console.log('Express server is listening on port', port);
