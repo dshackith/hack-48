@@ -6,6 +6,14 @@ var router = express.Router();
 var Question = require('./models/Question').Question;
 var User = require('./models/User').User;
 
+function formQuestionObject(q) {
+	let result = {
+		text: q.text,
+		answers: q.answers ? q.answers.map(a => a.text) : null // There _should_ always be answers, but this plays it safe
+	}
+	return result;
+}
+
 // Parameter setup - If the request param is defined with questionID, 
 // this function will automatically populate the request with the corresponding Question
 router.param('questionID', function(req,res,next,id){
@@ -68,23 +76,23 @@ router.get("/randomQuestion/", function(req, res, next){
 		)
 		.exec(function(err, question){
 			if(err) return next(err);
-			res.json(question);
+			
+			if (req.user) {
+				req.user.questions.push(
+					{
+						question_id: question[0]._id,
+						status: "asked"
+					}
+				)
+				req.user.update(req.user, function(err, user){
+					if(err) return next(err);
+					res.status(200);
+					res.json(formQuestionObject(question[0]));
+				});
+			} else { res.json(formQuestionObject(question[0])) }
+			
 		});
 
-	/*// From https://stackoverflow.com/questions/39277670/how-to-find-random-record-in-mongoose
-	Question.count().exec(function (err, count) {
-		console.log(count);
-	
-		// Random offset
-		let random = Math.floor(Math.random() * count)
-		
-		Question.findOne()
-			.skip(random)
-			.exec(function(err, question){
-				if(err) return next(err);
-				res.json(question);
-			});
-	})*/
 });
 
 // Create new Question

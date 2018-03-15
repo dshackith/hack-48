@@ -7,6 +7,7 @@ var dbConfig = require('./dbConfig.js');
 var jsonParser = require('body-parser').json;
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var User = require('./models/User').User;
 
 mongoose.connect(dbConfig.connectionstring);
 
@@ -34,6 +35,27 @@ app.use(function(req, res, next){
 		return res.status(200).json({});
 	}
 	next();
+});
+
+// Look for a user ID in each request and select the user if found
+app.use(function(req, res, next) {
+    if (req.header('user')) {
+		let userId = req.header('user');
+		User.findById(userId, function(err, doc){
+			if(err) return next(err);
+			if(!doc) {
+				err = new Error('Not Found');
+				err.status = 404;
+				return next(err);
+			}
+		})
+		.exec(function(err, doc){
+			req.user = doc;
+			console.log(doc);
+			return next();
+		});
+	} else { return next() }
+	
 });
 
 app.use("/", routes);
