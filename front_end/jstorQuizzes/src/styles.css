@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    font-family: arial
+}
+
+.j_logo {
+    display: inline-block;
+    width: 94px;
+    height: auto;
+    content: url('./app/images/j_logo.png');
+}
+
+heading h1 {
+    font-size: 48.0px;
+    font-weight: bold;
+}
+
+h3.question-header {
+    font-size: 16.0px;
+}

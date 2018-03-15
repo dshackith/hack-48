@@ -1,0 +1,13 @@
+  
+    <div class="col-md-2"></div>
+    <div *ngIf="question" class="col-md-8">
+      <h3 class="question-header">Question</h3>
+      <p>{{question.text}}</p>
+      <h3 class="question-header">Choose an answer</h3>
+      <div *ngFor="let answer of question.answers; let i = index" class="answer-option col-md-12" (click)="logAnswer(answer)">
+        <div class="answer-number">{{ i }}</div>
+        <span>{{ answer }}</span>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+

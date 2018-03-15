@@ -1,0 +1,16 @@
+.answer-number {
+    display: inline-block;
+    background-color: rgba(153,0,0,1.0);
+    color: #fff;
+    font-size: 24px;
+    padding: 5px;
+    width: 45px;
+    min-height: 45px;
+    text-align: center;
+}
+
+.answer-option {
+    border: 1px solid rgba(214,214,214,1.0);
+    padding: 1px;
+    margin: 10px;
+}

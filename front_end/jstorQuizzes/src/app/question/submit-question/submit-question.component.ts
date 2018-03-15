@@ -43,4 +43,20 @@ export class SubmitQuestionComponent implements OnInit {
     .subscribe(data => this.updateSuccess = data);
   }
 
+  public log = function(item) {
+    console.log(item);
+  }
+
+  public selectCorrect = function(i) {
+    this.log(i);
+    let ii = 0;
+    while (ii < this.question.answers.length) {
+      console.log(ii);
+      ii != i ? this.question.answers[ii].correct = false: this.question.answers[i].correct = true;
+      ii++;
+    }
+    //this.question.answers[i].correct = true;
+    this.log(this.question.answers);
+  }
+
 }

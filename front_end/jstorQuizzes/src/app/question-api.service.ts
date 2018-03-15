@@ -16,4 +16,10 @@ export class QuestionApiService {
     .map((res:HttpResponse <any>) => res);
   }
 
+  public getRandomQuestion = function (question) {
+    return this.http.get(`${environment.apiAddress}/randomQuestion/`)
+    .map((res:HttpResponse <any>) => res);
+  }
+
+
 }

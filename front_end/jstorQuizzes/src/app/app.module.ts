@@ -9,12 +9,14 @@ import { QuestionApiService } from './question-api.service'
 
 import { HttpClientModule, HttpClient, HttpResponse} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AnswerQuestionComponent } from './question/answer-question/answer-question.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SubmitQuestionComponent
+    SubmitQuestionComponent,
+    AnswerQuestionComponent
   ],
   imports: [
     BrowserModule,

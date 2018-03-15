@@ -157,6 +157,12 @@ router.put("/users/:userID", function(req, res, next){
 	});
 });
 
+// Testing
+router.post("/answer/:questionID", function(req, res, next){
+	res.status(200);
+	res.json(req.question.answers);
+});
+
 // Answer a question
 router.post("/answer/:questionID/:userID", function(req, res, next){
 	console.log(req.body);
