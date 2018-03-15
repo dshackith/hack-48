@@ -1,2 +1,31 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<router-outlet></router-outlet>
+<div class="content">
+    <div class="container">
+        <div class="j_logo"></div>
+        <nav>
+            <div class=advanced-search-copy>Advanced Search <i class="fa fa-caret-down"></i></div>
+            <div class=browse-copy>Browse <i class="fa fa-caret-down"></i></div>
+            <div class=about-copy>About</div>
+            <div class=support-copy>Support</div>
+            <a class=trivia-copy routerLink="/">Trivia</a>
+            <div *ngIf="currentUser">
+                <div class="group10-copy4 login-to-my-account">
+                    <span style="font-size: medium"> Hello <b>{{currentUser.name}}</b>!</span>
+                </div>
+                <a class=register-copy (click)="logout()">Logout</a>
+            </div>
+            <div *ngIf="!currentUser">
+                <div class=group10-copy4>
+                    <a class=login-to-my-account routerLink="login">Login to My Account</a>
+                </div>
+                <a class=register-copy href="https://www.jstor.org/register" target="_blank">Register</a>
+            </div>
+        </nav>
+    </div>
+    <hr/>
+    <div class="content">
+        <div class="row" style="margin: 2em;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+

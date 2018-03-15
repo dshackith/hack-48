@@ -1,6 +1,8 @@
 'use strict';
 
 var express = require('express');
+var request = require('request');
+var config = require('./dbConfig');
 var _ = require('underscore');
 var router = express.Router();
 var Question = require('./models/Question').Question;
@@ -54,8 +56,6 @@ router.get("/questions/:questionID", function(req, res, next) {
 // View random Question
 router.get("/randomQuestion/", function(req, res, next) {
 
-  // Paramesh: We might also want the User ID passed in - because we may have to add this question to the "attempted" list.
-
   Question.aggregate(
     {$sample: {size: 1}}
   )
@@ -68,7 +68,8 @@ router.get("/randomQuestion/", function(req, res, next) {
             question_id: question[0]._id,
             status: "asked"
           }
-        )
+        );
+
         req.user.update(req.user, function(err, user) {
           if(err) return next(err);
           res.status(200);
@@ -85,6 +86,10 @@ router.get("/randomQuestion/", function(req, res, next) {
 // Create new Question
 router.post("/questions/", function(req, res, next) {
   var question = new Question(req.body);
+  if(req.user) {
+    question.contributor = user;
+  }
+
   question.save(function(err, question) {
     if(err) return next(err);
     res.status(200);
@@ -122,6 +127,7 @@ router.get("/users/", function(req, res, next) {
 
 // Get User
 router.get("/users/:userID", function(req, res, next) {
+  res.status(200);
   res.json(req.user);
 });
 
@@ -142,6 +148,12 @@ router.put("/users/:userID", function(req, res, next) {
     res.status(200);
     res.json(user);
   });
+});
+
+// Get Current User
+router.get("/currentUser", function(req, res, next) {
+  res.status(200);
+  res.json(req.user);
 });
 
 // Answer a question
@@ -186,7 +198,6 @@ router.post("/answer/:questionID", function(req, res, next) {
   // Update stats
   if(correct) {
     user.stats.total_correct++;
-    user.stats.total_attempts++; // TODO - this logic will move if the answer is already generated on Viewing the question
   }
 
   user.save(function(err, user) {
@@ -194,6 +205,62 @@ router.post("/answer/:questionID", function(req, res, next) {
     res.status(200);
     res.json(answer);
   });
+});
+
+// Authentication Request
+router.post("/authenticate", function(req, res, next) {
+  if(req.user) {
+    res.status(200);
+    return res.json(user);
+  }
+
+  var credentials = req.body;
+
+  var options = {
+    uri: config.iacLoginURL + '/api/login',
+    method: 'POST',
+    json: credentials
+  };
+
+  request(options, function(error, response, body) {
+
+      if(error) {
+        console.error('Login failed:', error);
+        return next(error);
+      }
+
+      options = {
+        url: config.iacProfileURL + '/search/byUsername?username=' + credentials.username,
+        method: 'GET',
+        json: true
+      };
+
+      // Now get more user information by search
+      request(options, function(error, response, body) {
+
+        if(error || !body || !body.size) {
+          console.error('Unable to get user profile:', error);
+          return next(error);
+        }
+
+        var profile = body.results[0];
+
+        // Woohoo - Now create this user inside our app
+        var user = new User({
+          jstor_username: profile.credentials,
+          jstor_id: profile.internalId,
+          name: profile.contactName,
+          email: profile.contact
+        });
+
+        user.save(function(err, user) {
+          if(err) return next(err);
+          res.status(200);
+          res.json(user);
+        });
+      });
+    }
+  );
 });
 
 // This line is required for use in other files

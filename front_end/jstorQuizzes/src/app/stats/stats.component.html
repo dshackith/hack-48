@@ -6,25 +6,28 @@
             <strong>Answered</strong>
         </div>
         <div class="col-md-6">
-            10
+            {{currentUser.stats.total_attempts}}&nbsp;
         </div>
         <div class="col-md-6 align-right">
             <strong>Correct</strong>
         </div>
         <div class="col-md-6">
-            10
+            {{currentUser.stats.total_correct}}&nbsp;
         </div>
         <div class="col-md-6 align-right">
             <strong>% Correct</strong>
         </div>
         <div class="col-md-6">
-            100%
+            <span *ngIf="currentUser.stats.total_correct && currentUser.stats.total_attempts">
+                {{100 * currentUser.stats.total_correct / currentUser.stats.total_attempts | number}} %
+            </span>
+            &nbsp;
         </div>
         <div class="col-md-6 align-right">
             <strong>Ranking</strong>
         </div>
         <div class="col-md-6" style="margin-right: 0; padding-right: 0">
-            10 out of 12345
+            1 out of 12345&nbsp;
         </div>
     </div>
 </div>

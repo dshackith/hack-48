@@ -29,7 +29,7 @@ app.use(jsonParser({limit: '1mb'}));
 
 app.use(function(req, res, next){
 	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, user');
 	if(req.method === 'OPTIONS'){
 		res.header('Access-Control-Allow-Methods', 'PUT,POST,DELETE');
 		return res.status(200).json({});
@@ -39,23 +39,26 @@ app.use(function(req, res, next){
 
 // Look for a user ID in each request and select the user if found
 app.use(function(req, res, next) {
-    if (req.header('user')) {
-		let userId = req.header('user');
-		User.findById(userId, function(err, doc){
-			if(err) return next(err);
-			if(!doc) {
-				err = new Error('Not Found');
-				err.status = 404;
-				return next(err);
-			}
-		})
-		.exec(function(err, doc){
-			req.user = doc;
-			console.log(doc);
-			return next();
-		});
-	} else { return next() }
-	
+  if(req.header('user')) {
+    let userId = req.header('user');
+    console.log(userId);
+    User.findById(userId, function(err, doc) {
+      if(err) return next(err);
+      if(!doc) {
+        err = new Error('Not Found');
+        err.status = 404;
+        return next(err);
+      }
+    })
+      .exec(function(err, doc) {
+        req.user = doc;
+        console.log(doc);
+        return next();
+      });
+  } else {
+    return next()
+  }
+
 });
 
 app.use("/", routes);
