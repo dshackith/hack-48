@@ -115,10 +115,11 @@ router.post("/questions/", function(req, res, next) {
     });
     json.answers = answers;
   }
-  var question = new Question(json);
   if(req.user) {
-    question.contributor = user;
+    json.contributor = req.user._id;
   }
+
+  var question = new Question(json);
 
   question.save(function(err, question) {
     if(err) return next(err);
