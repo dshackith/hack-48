@@ -1,3 +1,4 @@
+import * as _ from 'underscore';
 import { Component, OnInit } from '@angular/core';
 import { QuestionApiService } from '../../question-api.service';
 import { FormsModule } from '@angular/forms';
@@ -15,23 +16,28 @@ export class SubmitQuestionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.newQuestion();
     this.addAnswer();
   }
 
   updateSuccess: any;
 
-  question = {
-    text: "",
-    answers: [],
-    sources: [
+  question = {};
+
+  public newQuestion = function() {
+    this.question = {
+      text: "",
+      answers: [],
+      sources: [
         {url: "", citation: ""}
-    ],
-    type: "String"
+      ],
+      type: "String"
+    }
   }
 
-  public addAnswer = function() {
+  public addAnswer = _.debounce(function() {
     this.question.answers.push({text: "", correct: false});
-  }
+  }, 100);
 
   public removeAnswer = function(index) {
     this.question.answers.splice(index,1);
@@ -40,7 +46,10 @@ export class SubmitQuestionComponent implements OnInit {
   private submitQuestion = function() {
     console.log(this.questionApiService);
     this.questionApiService.submitQuestion(this.question)
-    .subscribe(data => this.updateSuccess = data);
+    .subscribe(data => {
+      this.updateSuccess = data;
+      this.newQuestion();
+    });
   }
 
   public log = function(item) {

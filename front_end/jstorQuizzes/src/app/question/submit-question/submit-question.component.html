@@ -20,4 +20,13 @@
     </div>
     <button (click)="submitQuestion()" class="btn btn-primary">Submit</button>
     <a routerLink="/" class="btn btn-default">Cancel</a>
+
+    <div *ngIf="updateSuccess" style="margin: 1em;">
+        <div class="alert alert-success">
+            <strong>Thank you!</strong> Your question was added successfully!
+        </div>
+
+        <i>{{updateSuccess.text}}</i>
+    </div>
+
 </form>
