@@ -48,10 +48,10 @@ export class SubmitQuestionComponent implements OnInit {
   }
 
   public selectCorrect = function(i) {
-    this.log(i);
+    //this.log(i);
     let ii = 0;
     while (ii < this.question.answers.length) {
-      console.log(ii);
+      //this.log(ii);
       ii != i ? this.question.answers[ii].correct = false: this.question.answers[i].correct = true;
       ii++;
     }

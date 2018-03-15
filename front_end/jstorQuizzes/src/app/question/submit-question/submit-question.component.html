@@ -3,7 +3,7 @@
   <p><label>Question:</label> <input type="text" [(ngModel)]="question.text" name="text"></p>
   <p>Answers:</p>
   <p *ngFor="let a of question.answers; let i = index"><input type="text" [(ngModel)]="question.answers[i].text" name="answer-{{i}}" />
-    <input type="checkbox" name="correct" (click)="selectCorrect(i)" [(ngModel)]="question.answers[i].correct" />
+    <input type="checkbox" name="correct" (click)="selectCorrect(i)" [checked]="question.answers[i].correct"/>
     <button *ngIf="(question.answers.length - 1) == i" (click)="addAnswer()">+</button>
     <button *ngIf="(question.answers.length - 1) != i" (click)="removeAnswer(i)">-</button>
   </p>
