@@ -60,45 +60,46 @@ router.post("/randomQuestion/", function(req, res, next) {
     previousQuestions = [];
   }
 
-  Question
-    .find({
-      _id: {$nin: previousQuestions}
-    })
-    .limit(1)
-    .exec(function(err, question) {
-      if(err) return next(err);
+  var clearPrevious = false;
+  var populateResponse = function(err, question) {
+    if(err) return next(err);
 
-      if(!question || !question.length) {
-        // Pick some random question
-        return Question.findOne().populate('contributor').exec(function(err, question) {
-          if(err) return next(err);
-          res.status(200);
-          let retQuestion = formQuestionObject(question);
-          retQuestion.clearPrevious = true;
-          return res.json(retQuestion);
-        });
-      }
-
-      Question.populate(question[0], 'contributor', function() {
-        if(req.user) {
-          req.user.questions.push(
-            {
-              question: question[0],
-              status: "asked"
-            }
-          );
-
-          req.user.update(req.user, function(err, user) {
-            if(err) return next(err);
-            res.status(200);
-            res.json(formQuestionObject(question[0]));
-          });
-        } else {
-          res.json(formQuestionObject(question[0]))
+    if(req.user) {
+      req.user.questions.push(
+        {
+          question: question,
+          status: "asked"
         }
-      });
-    });
+      );
 
+      req.user.update(req.user);
+    }
+
+    var returnQuestion = formQuestionObject(question);
+    if(clearPrevious) {
+      returnQuestion.clearPrevious = true;
+    }
+
+    res.json(returnQuestion);
+  };
+
+  Question.count().exec(function(err, count) {
+    var random = Math.floor(Math.random() * count);
+    if(count <= previousQuestions.length) {
+      clearPrevious = true;
+      previousQuestions = [];
+    }
+    if(random >= (count - previousQuestions.length)) {
+      random = 0;
+    }
+    var findOne = Question.findOne({
+      _id: {$nin: previousQuestions}
+    });
+    if(random) {
+      findOne.skip(random);
+    }
+    findOne.populate('contributor').exec(populateResponse);
+  });
 });
 
 // Create new Question
