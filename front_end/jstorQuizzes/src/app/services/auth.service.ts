@@ -48,7 +48,7 @@ export class AuthenticationService {
 
       // Try to load the latest data for this user
       this.http.get<any>(`${environment.apiAddress}/currentUser`)
-        .map(user => {
+        .subscribe(user => {
           // login successful if there's a jwt token in the response
           if (user && user._id) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -68,16 +68,6 @@ export class AuthenticationService {
     }
 
     return false;
-  }
-
-  updateStats(user) {
-    this.currentUser.stats = user.stats;
-
-    // store user details and jwt token in local storage to keep user logged in between page refreshes
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-
-    this.updateCurrentUser.emit(this.currentUser);
-
   }
 
   populateStats() {

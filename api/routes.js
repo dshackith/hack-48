@@ -31,7 +31,6 @@ router.param('questionID', function(req, res, next, id) {
   })
     .exec(function(err, doc) {
       req.question = doc;
-      console.log(doc);
       return next();
     });
 });
@@ -65,7 +64,7 @@ router.get("/randomQuestion/", function(req, res, next) {
       if(req.user) {
         req.user.questions.push(
           {
-            question_id: question[0]._id,
+            question: question[0],
             status: "asked"
           }
         );
@@ -158,12 +157,12 @@ router.get("/currentUser", function(req, res, next) {
 
 // Answer a question
 router.post("/answer/:questionID", function(req, res, next) {
-  var answerGiven = req.body.answer_given;
+  let answerGiven = req.body.answer_given;
 
   // TODO - find if there's an existing answer
 
-  var correctAnswer = 0;
-  var correct = false;
+  let correctAnswer = 0;
+  let correct = false;
 
   _.each(req.question.answers, function(answer, index) {
     if(answer.correct) {
@@ -175,28 +174,43 @@ router.post("/answer/:questionID", function(req, res, next) {
     correct = true;
   }
 
-  var answer = {
-    question: req.question,
-    status: 'answered',
-    time_answered: Date.now(),
-    correct_answer: correctAnswer,
-    correct: correct,
-    sources: req.question.sources
-  };
+  // Find the already "asked" question
+  let answer = null;
+  if(req.user) {
+    answer = req.user.questions.find(q => req.question.equals(q.question) && q.status == "asked");
+  }
 
-  // TODO move user login to session instead of passing an ID
+  if(!answer) {
+    answer = {
+      question: req.question,
+      status: 'answered'
+    }
+  }
+
+  answer.status = 'answered';
+  answer.time_answered = Date.now();
+  answer.correct_answer= correctAnswer;
+  answer.correct = correct;
+  answer.sources = req.question.sources;
+
+  let user = req.user;
+
   if(!user) {
     res.status(200);
-    res.json(answer);
+    return res.json(answer);
   }
 
   // Registered user answering the question
-  var user = req.user;
-
-  user.questions.push(answer);
+  if(!user.stats.total_attempts) {
+    user.stats.total_attempts = 0;
+  }
+  user.stats.total_attempts++;
 
   // Update stats
   if(correct) {
+    if(!user.stats.total_correct) {
+      user.stats.total_correct = 0;
+    }
     user.stats.total_correct++;
   }
 
@@ -214,9 +228,9 @@ router.post("/authenticate", function(req, res, next) {
     return res.json(user);
   }
 
-  var credentials = req.body;
+  let credentials = req.body;
 
-  var options = {
+  let options = {
     uri: config.iacLoginURL + '/api/login',
     method: 'POST',
     json: credentials
@@ -243,10 +257,10 @@ router.post("/authenticate", function(req, res, next) {
           return next(error);
         }
 
-        var profile = body.results[0];
+        let profile = body.results[0];
 
         // Woohoo - Now create this user inside our app
-        var user = new User({
+        let user = new User({
           jstor_username: profile.credentials,
           jstor_id: profile.internalId,
           name: profile.contactName,

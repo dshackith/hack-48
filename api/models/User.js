@@ -15,7 +15,7 @@ var UserSchema = new Schema({
     questions: [
                 {
                     answer_order: [Number], // For multiple choice only
-                    question_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Question'},
+                    question: {type: mongoose.Schema.Types.ObjectId, ref: 'Question'},
                     status: String,
                     time_asked: {type: Date, default: Date.now},
                     time_answered: Date,
