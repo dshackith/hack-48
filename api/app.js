@@ -8,6 +8,7 @@ var jsonParser = require('body-parser').json;
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var User = require('./models/User').User;
+var cluster = require ('express-cluster');
 
 mongoose.connect(dbConfig.connectionstring);
 
@@ -80,8 +81,13 @@ app.use(function(err, req, res, next){
 	});
 });
 
-var port = process.env.PORT || 3008;
+//var port = process.env.PORT || 3008;
 
-app.listen(port, function(){
+cluster(function(worker) {
+      var port = process.env.PORT || 3008;
+          return (app.listen(port));
+          });
+
+/*app.listen(port, function(){
 	console.log('Express server is listening on port', port);
-});
+});*/
